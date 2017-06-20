@@ -1,10 +1,6 @@
 import * as React from 'react';
 import {AppBar} from 'material-ui';
 
-interface NavBarProps {}
-
-const NavBar: React.SFC<NavBarProps> = () => (
+export const NavBar = () => (
     <AppBar title="Marvel App" />
 );
-
-export {NavBar};

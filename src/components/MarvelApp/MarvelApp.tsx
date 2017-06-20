@@ -1,8 +1,8 @@
 import * as React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import {NavBar} from './components';
+import {NavBar} from '../NavBar';
 
-class MarvelApp extends React.Component<{}, null> {
+export class MarvelApp extends React.Component<{}, {}> {
   render() {
     return (
       <MuiThemeProvider>
@@ -13,5 +13,3 @@ class MarvelApp extends React.Component<{}, null> {
     );
   }
 }
-
-export default MarvelApp;
