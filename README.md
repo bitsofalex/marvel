@@ -12,7 +12,7 @@ You will have to register for a developer account from Marvel before you can run
 
 ### Installing
 
-Install the required dependencies using npm:
+Install the required dependencies using yarn:
 
 ```
 yarn install
@@ -37,5 +37,5 @@ Open your browser and enter (http://localhost:3000/)
 To execute the tests:
 
 ```
-npm run test
+yarn test
 ```
