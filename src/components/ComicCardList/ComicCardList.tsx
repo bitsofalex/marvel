@@ -14,7 +14,7 @@ import {
   PageControl
 } from 'bloomer';
 import { style } from 'typestyle';
-import { Comic } from '../../apis/marvel/marvelApis';
+import { Comic, CharacterSummary } from '../../apis/marvel/marvelApis';
 
 interface ComicCardListProp extends RouteComponentProps<{}> {
   store: ComicStore;
@@ -70,6 +70,7 @@ export class ComicCardList extends React.Component<ComicCardListProp, {}> {
           <CardContent>
             <Content>
               <Title tag="div" isSize={5}>{comic.title}</Title>
+              {comic.characters.items.map((character: CharacterSummary) => <p>{character.name}</p>)}
             </Content>
           </CardContent>
         </Card>

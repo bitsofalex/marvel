@@ -23,6 +23,18 @@ export interface Comic {
   title: string;
   thumbnail: Image;
   description: string;
+  characters: CharacterList;
+}
+
+export interface CharacterList {
+  returned?: number;
+  items: CharacterSummary[];
+}
+
+export interface CharacterSummary {
+  resourceURI?: string;
+  name?: string;
+  role?: string;
 }
 
 export interface Character {
