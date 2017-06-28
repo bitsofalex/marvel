@@ -3,7 +3,16 @@ import { observer } from 'mobx-react';
 import { RouteComponentProps } from 'react-router-dom';
 import { ComicStore } from '../../stores/ComicStore';
 import { Loading } from '../../components';
-import { Card, CardImage, CardContent, Content, Title } from 'bloomer';
+import {
+  Card,
+  CardImage,
+  CardContent,
+  Content,
+  Title,
+  Container,
+  Pagination,
+  PageControl
+} from 'bloomer';
 import { style } from 'typestyle';
 import { Comic } from '../../apis/marvel/marvelApis';
 
@@ -37,9 +46,9 @@ export class ComicCardList extends React.Component<ComicCardListProp, {}> {
     this.props.store.loadComics(offset);
   }
 
-  handlePageClick = (data: { selected: number }) => {
-    global.console.log(this.props);
-    this.props.store.loadComics(data.selected);
+  handlePageClick = () => {
+    const comicStore = this.props.store;
+    this.props.store.loadComics(comicStore.offset + 1);
   }
 
   renderList(comics: Comic[]) {
@@ -73,6 +82,12 @@ export class ComicCardList extends React.Component<ComicCardListProp, {}> {
           <div className={comicListClass}>
             {this.renderList(store.comics)}
           </div>
+          <Container className={style({ padding: '2.5em' })}>
+            <Pagination>
+              <PageControl isPrevious={true}>Previous</PageControl>
+              <PageControl isNext={true} onClick={() => this.handlePageClick()}>Next</PageControl>
+            </Pagination>
+          </Container>
         </div>
       );
   }
