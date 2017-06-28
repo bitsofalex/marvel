@@ -10,7 +10,7 @@ interface MarvelAppProps {
   comicStore?: ComicStore;
 }
 
-const minWindowHeight = style({ display: 'flex', flexDirection: 'column', minHeight: '100vh' });
+const isFullScreenClass = style({ display: 'flex', flexDirection: 'column', minHeight: '100vh', width: '100vw' });
 
 @inject('comicStore')
 @observer
@@ -18,12 +18,18 @@ export class MarvelApp extends React.Component<MarvelAppProps, {}> {
 
   render() {
     return (
-      <Container isFullWidth isPaddingless isMarginless className={minWindowHeight}>
+      <Container
+        isPaddingless={true}
+        isMarginless={true}
+        className={isFullScreenClass}
+      >
         <Router>
-          <Box className={minWindowHeight}>
-            <Nav className={style({padding: '1rem 2rem', backgroundColor: '#46454A', color: '#fff'})}>
+          <Box className={isFullScreenClass} isPaddingless={true}>
+            <Nav className={style({ backgroundColor: '#46454A' })}>
               <NavLeft>
-                <NavItem><Title tag="h1" isSize={3}>Marvel App</Title></NavItem>
+                <NavItem>
+                  <Title tag="h1" isSize={3} className={style({ color: '#fff' })}>Marvel App</Title>
+                </NavItem>
               </NavLeft>
             </Nav>
             <Switch>
