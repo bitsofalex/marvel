@@ -46,7 +46,12 @@ export class ComicCardList extends React.Component<ComicCardListProp, {}> {
     this.props.store.loadComics(offset);
   }
 
-  handlePageClick = () => {
+  previousPage = () => {
+    const comicStore = this.props.store;
+    this.props.store.loadComics(comicStore.offset - 1);
+  }
+
+  nextPage = () => {
     const comicStore = this.props.store;
     this.props.store.loadComics(comicStore.offset + 1);
   }
@@ -84,8 +89,18 @@ export class ComicCardList extends React.Component<ComicCardListProp, {}> {
           </div>
           <Container className={style({ padding: '2.5em' })}>
             <Pagination>
-              <PageControl isPrevious={true}>Previous</PageControl>
-              <PageControl isNext={true} onClick={() => this.handlePageClick()}>Next</PageControl>
+              <PageControl
+                isPrevious={true}
+                onClick={() => this.previousPage()}
+                isHidden={store.offset < 1}
+              >Previous
+              </PageControl>
+              <PageControl
+                isNext={true}
+                onClick={() => this.nextPage()}
+                isHidden={store.offset > store.total / store.pageCount}
+              >Next
+              </PageControl>
             </Pagination>
           </Container>
         </div>
