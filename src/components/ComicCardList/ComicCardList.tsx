@@ -46,14 +46,25 @@ export class ComicCardList extends React.Component<ComicCardListProp, {}> {
     this.props.store.loadComics(offset);
   }
 
+  componentDidUpdate() {
+    const search = this.props.location.search;
+    const params = new URLSearchParams(search);
+    const offset = Number(params.get('offset'));
+    if (offset !== this.props.store.offset) {
+      this.props.store.loadComics(offset);
+    }
+  }
+
   previousPage = () => {
-    const comicStore = this.props.store;
-    this.props.store.loadComics(comicStore.offset - 1);
+    const { history } = this.props;
+    const { store } = this.props;
+    history.push(`/?offset=${store.offset - 1}`);
   }
 
   nextPage = () => {
-    const comicStore = this.props.store;
-    this.props.store.loadComics(comicStore.offset + 1);
+    const { history } = this.props;
+    const { store } = this.props;
+    history.push(`/?offset=${store.offset + 1}`);
   }
 
   renderList(comics: Comic[]) {
@@ -70,7 +81,8 @@ export class ComicCardList extends React.Component<ComicCardListProp, {}> {
           <CardContent>
             <Content>
               <Title tag="div" isSize={5}>{comic.title}</Title>
-              {comic.characters.items.map((character: CharacterSummary) => <p>{character.name}</p>)}
+              {comic.characters.items.map((character: CharacterSummary, index: number) =>
+                <p key={index}>{character.name}</p>)}
             </Content>
           </CardContent>
         </Card>
